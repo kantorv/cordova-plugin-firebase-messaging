@@ -54,6 +54,10 @@ public class FirebaseMessagingPlugin extends CordovaPlugin {
         } else if ("onMessage".equals(action)) {
             this.registerMessageReceiver(callbackContext);
             return true;
+        } else if ("send".equals(action)) {
+            this.sendUpstreamMsg(callbackContext, args.optString(0));
+            return true;
+
         } else if ("setBadge".equals(action)) {
             this.setBadge(callbackContext, args.optInt(0));
             return true;
@@ -161,6 +165,20 @@ public class FirebaseMessagingPlugin extends CordovaPlugin {
             FirebaseMessagingPlugin.lastBundle = null;
         }
     }
+
+    private void sendUpstreamMsg(CallbackContext callbackContext, String data) {
+
+        FirebaseMessaging fm = FirebaseMessaging.getInstance();
+        long unixTime = System.currentTimeMillis() / 1000L;
+
+        fm.send(new RemoteMessage.Builder("332659783138@gcm.googleapis.com")
+            .setMessageId(Long.toString(unixTime))
+            .addData("upstream", data)
+            .build());
+
+         callbackContext.success();
+    }
+
 
     private void setBadge(CallbackContext callbackContext, int value) {
         if (value >= 0) {
