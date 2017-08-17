@@ -64,6 +64,9 @@ public class FirebaseMessagingPlugin extends CordovaPlugin {
         } else if ("getBadge".equals(action)) {
             this.getBadge(callbackContext);
             return true;
+        } else if ("getId".equals(action)) {
+            this.getId(callbackContext);
+            return true;
         } else if ("requestPermission".equals(action)) {
             this.requestPermission(callbackContext);
             return true;
@@ -171,7 +174,7 @@ public class FirebaseMessagingPlugin extends CordovaPlugin {
         FirebaseMessaging fm = FirebaseMessaging.getInstance();
         long unixTime = System.currentTimeMillis() / 1000L;
 
-        fm.send(new RemoteMessage.Builder("332659783138@gcm.googleapis.com")
+        fm.send(new RemoteMessage.Builder("80219871290@gcm.googleapis.com")
             .setMessageId(Long.toString(unixTime))
             .addData("upstream", data)
             .build());
@@ -196,6 +199,11 @@ public class FirebaseMessagingPlugin extends CordovaPlugin {
         SharedPreferences settings = context.getSharedPreferences("badge", Context.MODE_PRIVATE);
         int number = settings.getInt("badge", 0);
         callbackContext.success(number);
+    }
+
+    private void getId(CallbackContext callbackContext) {
+        String id = FirebaseInstanceId.getInstance().getId();
+        callbackContext.success(id);
     }
 
     private void requestPermission(CallbackContext callbackContext) {
