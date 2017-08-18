@@ -23,8 +23,8 @@ module.exports = {
     getBadge: function(success, error) {
         exec(success, error, PLUGIN_NAME, "getBadge", []);
     },
-    getSenderId: function(success, error) {
-        exec(success, error, PLUGIN_NAME, "getSenderId", []);
+    getId: function(success, error) {
+        exec(success, error, PLUGIN_NAME, "getId", []);
     },
     requestPermission: function(success, error) {
         exec(success, error, PLUGIN_NAME, "requestPermission", []);

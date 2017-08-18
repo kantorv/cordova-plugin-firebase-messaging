@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
@@ -65,8 +64,8 @@ public class FirebaseMessagingPlugin extends CordovaPlugin {
         } else if ("getBadge".equals(action)) {
             this.getBadge(callbackContext);
             return true;
-        } else if ("getSenderId".equals(action)) {
-            this.getSenderId(callbackContext);
+        } else if ("getId".equals(action)) {
+            this.getId(callbackContext);
             return true;
         } else if ("requestPermission".equals(action)) {
             this.requestPermission(callbackContext);
@@ -202,9 +201,9 @@ public class FirebaseMessagingPlugin extends CordovaPlugin {
         callbackContext.success(number);
     }
 
-    private void getSenderId(CallbackContext callbackContext) {
-        String SENDER_ID = Resources.getSystem().getString(R.string.gcm_defaultSenderId);
-        callbackContext.success(SENDER_ID);
+    private void getId(CallbackContext callbackContext) {
+        String id = FirebaseInstanceId.getInstance().getId();
+        callbackContext.success(id);
     }
 
     private void requestPermission(CallbackContext callbackContext) {
