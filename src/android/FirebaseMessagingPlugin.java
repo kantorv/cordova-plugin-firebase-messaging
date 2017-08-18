@@ -66,7 +66,7 @@ public class FirebaseMessagingPlugin extends CordovaPlugin {
             this.getBadge(callbackContext);
             return true;
         } else if ("getSenderId".equals(action)) {
-            this.getId(callbackContext);
+            this.getSenderId(callbackContext);
             return true;
         } else if ("requestPermission".equals(action)) {
             this.requestPermission(callbackContext);
